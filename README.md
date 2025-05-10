@@ -1,1 +1,97 @@
-# abc
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新媒体岗位适配度测评</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .question {
+            margin: 30px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .options {
+            margin: 15px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #result {
+            display: none;
+            padding: 20px;
+            background: #e9f5ff;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>📱 新媒体岗位适配度测评</h2>
+    
+    <div id="questions">
+        <div class="question">
+            <h3>1/5 看到热点新闻时，你的第一反应是？</h3>
+            <div class="options">
+                <button onclick="selectOption(1, 5)">立即构思如何结合品牌传播</button>
+                <button onclick="selectOption(1, 3)">思考是否适合转化内容</button>
+                <button onclick="selectOption(1, 1)">简单吃瓜看看评论</button>
+            </div>
+        </div>
+
+        <!-- 类似结构添加更多题目 -->
+    </div>
+
+    <div id="result">
+        <h3>🎉 测评结果</h3>
+        <p id="scoreText"></p>
+        <p id="suggestion"></p>
+        <button onclick="location.reload()">重新测评</button>
+    </div>
+
+    <script>
+        let totalScore = 0;
+        let answeredQuestions = 0;
+
+        function selectOption(qNum, score) {
+            totalScore += score;
+            answeredQuestions++;
+            
+            if(answeredQuestions === 5) {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById("questions").style.display = "none";
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+            
+            let resultText = "";
+            if(totalScore >= 20) {
+                resultText = "🌟 新媒体达人：你非常适合新媒体运营岗位！";
+            } else if(totalScore >= 15) {
+                resultText = "💼 潜力型选手：经过系统学习可以胜任";
+            } else {
+                resultText = "📚 需要提升：建议补充相关技能知识";
+            }
+
+            document.getElementById("scoreText").textContent = `你的得分：${totalScore}分`;
+            document.getElementById("suggestion").textContent = resultText;
+        }
+    </script>
+</body>
+</html>
